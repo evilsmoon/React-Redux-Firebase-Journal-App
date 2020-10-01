@@ -1,17 +1,30 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { endLoginEmailPassword } from '../../actions/auth';
 import { JournalEntries } from './JournalEntries'
 
 export const Sidebar = () => {
+
+    const dispatch = useDispatch();
+    const handelLogout = () => {
+        console.log('logout')
+        dispatch(
+            endLoginEmailPassword()
+        )
+    }
     return (
         <aside className='journal__sidebar'>
             <div className='journal__sidebar-navbar'>
-            <h3 className='mt-5'>
-                <i className='far fa-moon'></i>
-                <samp> Gabriel</samp>
-            </h3>
+                <h3 className='mt-5'>
+                    <i className='far fa-moon'></i>
+                    <samp> Gabriel</samp>
+                </h3>
 
-            <button className='btn '>
-                logout
+                <button
+                    className='btn'
+                    onClick={handelLogout}
+                >
+                    logout
             </button>
 
             </div>
@@ -21,7 +34,7 @@ export const Sidebar = () => {
                     new Entry
                 </p>
             </div>
-            <JournalEntries/>
+            <JournalEntries />
         </aside>
     )
 }
