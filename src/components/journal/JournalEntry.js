@@ -1,29 +1,55 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import {activeNote} from '../../actions/notes'
+export const JournalEntry = ({ id, date, title, body, url }) => {
 
-export const JournalEntry = () => {
+    const noteDate = moment(date)
+
+
+    // console.log(noteDate)
+    const dispatch = useDispatch();
+    const handelEntryClick = ()=>{
+        console.log(id)
+        dispatch(
+            activeNote(id,{
+                date, 
+                title, 
+                body, 
+                url
+            })
+        );
+    }
     return (
-        <div className='journal__entry pointer'>
-            <div 
-                className='journal__entry-picture'
-                style={{
-                    backgroundSize:'cover',
-                    backgroundImage:'url(https://lh3.googleusercontent.com/proxy/EBKSAcEMPwcKT5PI-0pCDqeP4f0b2teVeWTrR0p_rFY4uAv2wx3fuj3KihB-Q3VDRp3Ic2IfKRv4BRuACYIAigwp_o7ZObTX85Uim6AuxTMGxsPAS7FU6xY52uf6JbMyS9kj)'
-                }}
+        <div 
+            className='journal__entry pointer'
+            onClick={handelEntryClick}
+        >
+            {
 
-            ></div>
+                url &&
+                <div
+                    className='journal__entry-picture'
+                    style={{
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${url})`
+                    }}
+
+                ></div>
+            }
             <div className='journal__entry-body'>
                 <p className='journal__entry-title'>
-                    Un nuevo dia
+                    {title}
                 </p>
                 <p className='journal__entry-content'>
-                    Est dolor velit deserunt nulla velit ut.
+                    {body}
                 </p>
             </div>
             <div className='journal__entry-date-box'>
-                <samp>Monday</samp>
-                <h4>28</h4>
+                <samp>{noteDate.format('dddd')}</samp>
+                <h4>{noteDate.format('Do')}</h4>
             </div>
-            
+
         </div>
     )
 }
