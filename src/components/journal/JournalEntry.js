@@ -5,12 +5,8 @@ import {activeNote} from '../../actions/notes'
 export const JournalEntry = ({ id, date, title, body, url }) => {
 
     const noteDate = moment(date)
-
-
-    // console.log(noteDate)
     const dispatch = useDispatch();
     const handelEntryClick = ()=>{
-        console.log(id)
         dispatch(
             activeNote(id,{
                 date, 
@@ -22,7 +18,7 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
     }
     return (
         <div 
-            className='journal__entry pointer'
+            className='journal__entry pointer animate__animated animate__fadeIn animate__faster'
             onClick={handelEntryClick}
         >
             {
